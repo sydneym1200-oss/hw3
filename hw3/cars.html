@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cars & Minivans</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Banner Slideshow -->
+  <header class="banner">
+    <div class="slideshow">
+      <div class="slides">
+        <img src="images/cars/images/86-front.jpg" alt="Toyota 86">
+        <img src="images/cars/images/avalon-front.jpg" alt="Toyota Avalon">
+        <img src="images/cars/images/camry-front.jpg" alt="Toyota Camry">
+        <img src="images/cars/images/corolla-front.jpg" alt="Toyota Corolla">
+        <img src="images/cars/images/sienna-front.jpg" alt="Toyota Sienna">
+      </div>
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cars.html" class="active">Cars & Minivans</a></li>
+      <li><a href="trucks.html">Trucks</a></li>
+      <li><a href="suvs.html">Crossovers & SUVs</a></li>
+      <li><a href="hybrids.html">Hybrids & FCVs</a></li>
+      <li><a href="upcoming.html">Upcoming</a></li>
+    </ul>
+  </nav>
+
+  <!-- Vehicles Section -->
+  <section class="vehicle-section">
+    <h2>Cars & Minivans</h2>
+    <div class="categories">
+      <div class="category" data-price="27000">
+        <img src="images/cars/images/86-front.jpg" alt="86">
+        <p>Toyota 86</p>
+        <p class="price">$27,000</p>
+      </div>
+      <div class="category" data-price="36000">
+        <img src="images/cars/images/avalon-front.jpg" alt="Avalon">
+        <p>Toyota Avalon</p>
+        <p class="price">$36,000</p>
+      </div>
+      <div class="category" data-price="25000">
+        <img src="images/cars/images/camry-front.jpg" alt="Camry">
+        <p>Toyota Camry</p>
+        <p class="price">$25,000</p>
+      </div>
+      <div class="category" data-price="20000">
+        <img src="images/cars/images/corolla-front.jpg" alt="Corolla">
+        <p>Toyota Corolla</p>
+        <p class="price">$20,000</p>
+      </div>
+      <div class="category" data-price="34000">
+        <img src="images/cars/images/sienna-front.jpg" alt="Sienna">
+        <p>Toyota Sienna</p>
+        <p class="price">$34,000</p>
+      </div>
+      <div class="category" data-price="18000">
+        <img src="images/cars/images/yaris-front.jpg" alt="Yaris">
+        <p>Toyota Yaris</p>
+        <p class="price">$18,000</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Price Filter -->
+  <section class="filter-section">
+    <h3>Filter by Price</h3>
+    <label for="minPrice">Min Price: </label>
+    <input type="number" id="minPrice" value="18000" step="1000">
+    <label for="maxPrice">Max Price: </label>
+    <input type="number" id="maxPrice" value="150000" step="1000">
+    <button onclick="filterVehicles()">Apply</button>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>Student: Sydney Macon | Class: CSC 335 | Homework 3</p>
+  </footer>
+
+  <!-- Slideshow + Filter Script -->
+  <script>
+  function initSlideshow(container) {
+    let slideIndex = 0;
+    const slides = container.querySelectorAll(".slides img");
+    const prevBtn = container.querySelector(".prev");
+    const nextBtn = container.querySelector(".next");
+
+    function showSlide(n) {
+      slides.forEach((img, i) => {
+        img.classList.remove("active");
+        if (i === n) img.classList.add("active");
+      });
+    }
+
+    function nextSlide() {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    function prevSlide() {
+      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    nextBtn.addEventListener("click", nextSlide);
+    prevBtn.addEventListener("click", prevSlide);
+    setInterval(nextSlide, 5000);
+    showSlide(slideIndex);
+  }
+
+  document.querySelectorAll(".slideshow").forEach(initSlideshow);
+
+  function filterVehicles() {
+    const min = parseInt(document.getElementById("minPrice").value);
+    const max = parseInt(document.getElementById("maxPrice").value);
+    const vehicles = document.querySelectorAll(".category");
+
+    vehicles.forEach(v => {
+      const price = parseInt(v.getAttribute("data-price"));
+      if (price >= min && price <= max) {
+        v.style.display = "block";
+      } else {
+        v.style.display = "none";
+      }
+    });
+  }
+  </script>
+</body>
+</html>
