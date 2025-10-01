@@ -11,9 +11,9 @@
   <header class="banner">
     <div class="slideshow">
       <div class="slides">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/mirai-front.jpg" alt="Toyota Mirai">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/prius-front.jpg" alt="Toyota Prius">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/rav4hybrid-front.jpg" alt="Toyota RAV4 Hybrid">
+        <img src="images/mirai-front.jpg" alt="Toyota Mirai">
+        <img src="images/prius-front.jpg" alt="Toyota Prius">
+        <img src="images/rav4hybrid-front.jpg" alt="Toyota RAV4 Hybrid">
       </div>
       <button class="prev">&#10094;</button>
       <button class="next">&#10095;</button>
@@ -37,17 +37,17 @@
     <h2>Hybrids & FCVs</h2>
     <div class="categories">
       <div class="category" data-price="49000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/mirai-front.jpg" alt="Mirai">
+        <img src="images/mirai-front.jpg" alt="Mirai">
         <p>Toyota Mirai</p>
         <p class="price">$49,000</p>
       </div>
       <div class="category" data-price="25000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/prius-front.jpg" alt="Prius">
+        <img src="images/prius-front.jpg" alt="Prius">
         <p>Toyota Prius</p>
         <p class="price">$25,000</p>
       </div>
       <div class="category" data-price="32000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/rav4hybrid-front.jpg" alt="RAV4 Hybrid">
+        <img src="images/rav4hybrid-front.jpg" alt="RAV4 Hybrid">
         <p>Toyota RAV4 Hybrid</p>
         <p class="price">$32,000</p>
       </div>
@@ -78,23 +78,36 @@
       const nextBtn = container.querySelector(".next");
 
       function showSlide(n) {
-        slides.forEach((img,i)=>{img.classList.remove("active"); if(i===n) img.classList.add("active");});
+        slides.forEach((img, i) => {
+          img.classList.remove("active");
+          if (i === n) img.classList.add("active");
+        });
       }
-      function nextSlide(){slideIndex=(slideIndex+1)%slides.length; showSlide(slideIndex);}
-      function prevSlide(){slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex);}
+
+      function nextSlide() {
+        slideIndex = (slideIndex + 1) % slides.length;
+        showSlide(slideIndex);
+      }
+
+      function prevSlide() {
+        slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+        showSlide(slideIndex);
+      }
+
       nextBtn.addEventListener("click", nextSlide);
       prevBtn.addEventListener("click", prevSlide);
-      setInterval(nextSlide,5000);
+      setInterval(nextSlide, 5000);
       showSlide(slideIndex);
     }
+
     document.querySelectorAll(".slideshow").forEach(initSlideshow);
 
     function filterVehicles() {
-      const min=parseInt(document.getElementById("minPrice").value);
-      const max=parseInt(document.getElementById("maxPrice").value);
-      document.querySelectorAll(".category").forEach(v=>{
-        const price=parseInt(v.getAttribute("data-price"));
-        v.style.display=(price>=min && price<=max)?"block":"none";
+      const min = parseInt(document.getElementById("minPrice").value);
+      const max = parseInt(document.getElementById("maxPrice").value);
+      document.querySelectorAll(".category").forEach(v => {
+        const price = parseInt(v.getAttribute("data-price"));
+        v.style.display = (price >= min && price <= max) ? "block" : "none";
       });
     }
   </script>
