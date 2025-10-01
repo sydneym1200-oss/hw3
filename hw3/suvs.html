@@ -11,11 +11,11 @@
   <header class="banner">
     <div class="slideshow">
       <div class="slides">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/4runner-front.jpg" alt="Toyota 4Runner">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/c-hr-front.jpg" alt="Toyota C-HR">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/highlander-front.jpg" alt="Toyota Highlander">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/rav4-front.jpg" alt="Toyota RAV4">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/sequoia-front.jpg" alt="Toyota Sequoia">
+        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/4runner-front.jpg" alt="Toyota 4Runner">
+        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/c-hr-front.jpg" alt="Toyota C-HR">
+        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/highlander-front.jpg" alt="Toyota Highlander">
+        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/rav4-front.jpg" alt="Toyota RAV4">
+        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/sequoia-front.jpg" alt="Toyota Sequoia">
       </div>
       <button class="prev">&#10094;</button>
       <button class="next">&#10095;</button>
@@ -39,37 +39,37 @@
     <h2>Crossovers & SUVs</h2>
     <div class="categories">
       <div class="category" data-price="38000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/4runner-front.jpg" alt="4Runner">
+        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/4runner-front.jpg" alt="4Runner">
         <p>Toyota 4Runner</p>
         <p class="price">$38,000</p>
       </div>
       <div class="category" data-price="23000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/c-hr-front.jpg" alt="C-HR">
+        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/c-hr-front.jpg" alt="C-HR">
         <p>Toyota C-HR</p>
         <p class="price">$23,000</p>
       </div>
       <div class="category" data-price="35000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/highlander-front.jpg" alt="Highlander">
+        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/highlander-front.jpg" alt="Highlander">
         <p>Toyota Highlander</p>
         <p class="price">$35,000</p>
       </div>
       <div class="category" data-price="39000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/highlanderhybrid-front.jpg" alt="Highlander Hybrid">
+        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/highlanderhybrid-front.jpg" alt="Highlander Hybrid">
         <p>Toyota Highlander Hybrid</p>
         <p class="price">$39,000</p>
       </div>
       <div class="category" data-price="85000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/landcruiser-front.jpg" alt="Land Cruiser">
+        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/landcruiser-front.jpg" alt="Land Cruiser">
         <p>Toyota Land Cruiser</p>
         <p class="price">$85,000</p>
       </div>
       <div class="category" data-price="27000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/rav4-front.jpg" alt="RAV4">
+        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/rav4-front.jpg" alt="RAV4">
         <p>Toyota RAV4</p>
         <p class="price">$27,000</p>
       </div>
       <div class="category" data-price="50000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/sequoia-front.jpg" alt="Sequoia">
+        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/sequoia-front.jpg" alt="Sequoia">
         <p>Toyota Sequoia</p>
         <p class="price">$50,000</p>
       </div>
@@ -93,51 +93,32 @@
 
   <!-- Slideshow + Filter Script -->
   <script>
-  function initSlideshow(container) {
-    let slideIndex = 0;
-    const slides = container.querySelectorAll(".slides img");
-    const prevBtn = container.querySelector(".prev");
-    const nextBtn = container.querySelector(".next");
+    function initSlideshow(container) {
+      let slideIndex = 0;
+      const slides = container.querySelectorAll(".slides img");
+      const prevBtn = container.querySelector(".prev");
+      const nextBtn = container.querySelector(".next");
 
-    function showSlide(n) {
-      slides.forEach((img, i) => {
-        img.classList.remove("active");
-        if (i === n) img.classList.add("active");
+      function showSlide(n) {
+        slides.forEach((img,i)=>{img.classList.remove("active"); if(i===n) img.classList.add("active");});
+      }
+      function nextSlide(){slideIndex=(slideIndex+1)%slides.length; showSlide(slideIndex);}
+      function prevSlide(){slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex);}
+      nextBtn.addEventListener("click", nextSlide);
+      prevBtn.addEventListener("click", prevSlide);
+      setInterval(nextSlide,5000);
+      showSlide(slideIndex);
+    }
+    document.querySelectorAll(".slideshow").forEach(initSlideshow);
+
+    function filterVehicles() {
+      const min=parseInt(document.getElementById("minPrice").value);
+      const max=parseInt(document.getElementById("maxPrice").value);
+      document.querySelectorAll(".category").forEach(v=>{
+        const price=parseInt(v.getAttribute("data-price"));
+        v.style.display=(price>=min && price<=max)?"block":"none";
       });
     }
-
-    function nextSlide() {
-      slideIndex = (slideIndex + 1) % slides.length;
-      showSlide(slideIndex);
-    }
-
-    function prevSlide() {
-      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-      showSlide(slideIndex);
-    }
-
-    nextBtn.addEventListener("click", nextSlide);
-    prevBtn.addEventListener("click", prevSlide);
-    setInterval(nextSlide, 5000);
-    showSlide(slideIndex);
-  }
-
-  document.querySelectorAll(".slideshow").forEach(initSlideshow);
-
-  function filterVehicles() {
-    const min = parseInt(document.getElementById("minPrice").value);
-    const max = parseInt(document.getElementById("maxPrice").value);
-    const vehicles = document.querySelectorAll(".category");
-
-    vehicles.forEach(v => {
-      const price = parseInt(v.getAttribute("data-price"));
-      if (price >= min && price <= max) {
-        v.style.display = "block";
-      } else {
-        v.style.display = "none";
-      }
-    });
-  }
   </script>
 </body>
 </html>
