@@ -71,51 +71,32 @@
 
   <!-- Slideshow + Filter Script -->
   <script>
-  function initSlideshow(container) {
-    let slideIndex = 0;
-    const slides = container.querySelectorAll(".slides img");
-    const prevBtn = container.querySelector(".prev");
-    const nextBtn = container.querySelector(".next");
+    function initSlideshow(container) {
+      let slideIndex = 0;
+      const slides = container.querySelectorAll(".slides img");
+      const prevBtn = container.querySelector(".prev");
+      const nextBtn = container.querySelector(".next");
 
-    function showSlide(n) {
-      slides.forEach((img, i) => {
-        img.classList.remove("active");
-        if (i === n) img.classList.add("active");
+      function showSlide(n) {
+        slides.forEach((img,i)=>{img.classList.remove("active"); if(i===n) img.classList.add("active");});
+      }
+      function nextSlide(){slideIndex=(slideIndex+1)%slides.length; showSlide(slideIndex);}
+      function prevSlide(){slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex);}
+      nextBtn.addEventListener("click", nextSlide);
+      prevBtn.addEventListener("click", prevSlide);
+      setInterval(nextSlide,5000);
+      showSlide(slideIndex);
+    }
+    document.querySelectorAll(".slideshow").forEach(initSlideshow);
+
+    function filterVehicles() {
+      const min=parseInt(document.getElementById("minPrice").value);
+      const max=parseInt(document.getElementById("maxPrice").value);
+      document.querySelectorAll(".category").forEach(v=>{
+        const price=parseInt(v.getAttribute("data-price"));
+        v.style.display=(price>=min && price<=max)?"block":"none";
       });
     }
-
-    function nextSlide() {
-      slideIndex = (slideIndex + 1) % slides.length;
-      showSlide(slideIndex);
-    }
-
-    function prevSlide() {
-      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-      showSlide(slideIndex);
-    }
-
-    nextBtn.addEventListener("click", nextSlide);
-    prevBtn.addEventListener("click", prevSlide);
-    setInterval(nextSlide, 5000);
-    showSlide(slideIndex);
-  }
-
-  document.querySelectorAll(".slideshow").forEach(initSlideshow);
-
-  function filterVehicles() {
-    const min = parseInt(document.getElementById("minPrice").value);
-    const max = parseInt(document.getElementById("maxPrice").value);
-    const vehicles = document.querySelectorAll(".category");
-
-    vehicles.forEach(v => {
-      const price = parseInt(v.getAttribute("data-price"));
-      if (price >= min && price <= max) {
-        v.style.display = "block";
-      } else {
-        v.style.display = "none";
-      }
-    });
-  }
   </script>
 </body>
 </html>
