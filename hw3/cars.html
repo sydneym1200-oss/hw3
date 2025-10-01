@@ -7,21 +7,23 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Banner with Slideshow -->
   <header class="banner">
     <div class="slideshow">
       <div class="slides">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/86-front.jpg" alt="Toyota 86">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/avalon-front.jpg" alt="Toyota Avalon">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/camry-front.jpg" alt="Toyota Camry">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/corolla-front.jpg" alt="Toyota Corolla">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/sienna-front.jpg" alt="Toyota Sienna">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/yaris-front.jpg" alt="Toyota Yaris">
+        <img src="images/86-front.jpg" alt="Toyota 86">
+        <img src="images/avalon-front.jpg" alt="Toyota Avalon">
+        <img src="images/camry-front.jpg" alt="Toyota Camry">
+        <img src="images/corolla-front.jpg" alt="Toyota Corolla">
+        <img src="images/sienna-front.jpg" alt="Toyota Sienna">
+        <img src="images/yaris-front.jpg" alt="Toyota Yaris">
       </div>
       <button class="prev">&#10094;</button>
       <button class="next">&#10095;</button>
     </div>
   </header>
 
+  <!-- Navigation Bar -->
   <nav class="navbar">
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -33,42 +35,44 @@
     </ul>
   </nav>
 
+  <!-- Vehicle Categories -->
   <section class="vehicle-section">
     <h2>Cars & Minivans</h2>
     <div class="categories">
       <div class="category" data-price="27000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/86-front.jpg" alt="86">
+        <img src="images/86-front.jpg" alt="86">
         <p>Toyota 86</p>
         <p class="price">$27,000</p>
       </div>
       <div class="category" data-price="36000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/avalon-front.jpg" alt="Avalon">
+        <img src="images/avalon-front.jpg" alt="Avalon">
         <p>Toyota Avalon</p>
         <p class="price">$36,000</p>
       </div>
       <div class="category" data-price="25000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/camry-front.jpg" alt="Camry">
+        <img src="images/camry-front.jpg" alt="Camry">
         <p>Toyota Camry</p>
         <p class="price">$25,000</p>
       </div>
       <div class="category" data-price="20000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/corolla-front.jpg" alt="Corolla">
+        <img src="images/corolla-front.jpg" alt="Corolla">
         <p>Toyota Corolla</p>
         <p class="price">$20,000</p>
       </div>
       <div class="category" data-price="34000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/sienna-front.jpg" alt="Sienna">
+        <img src="images/sienna-front.jpg" alt="Sienna">
         <p>Toyota Sienna</p>
         <p class="price">$34,000</p>
       </div>
       <div class="category" data-price="18000">
-        <img src="C:/Users/Administrator/Downloads/hw3-main/hw3-main/hw3/images/cars/images/yaris-front.jpg" alt="Yaris">
+        <img src="images/yaris-front.jpg" alt="Yaris">
         <p>Toyota Yaris</p>
         <p class="price">$18,000</p>
       </div>
     </div>
   </section>
 
+  <!-- Price Filter -->
   <section class="filter-section">
     <h3>Filter by Price</h3>
     <label for="minPrice">Min Price: </label>
@@ -78,32 +82,58 @@
     <button onclick="filterVehicles()">Apply</button>
   </section>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <p>Student: Sydney Macon | Class: CSC 335 | Homework 3</p>
   </footer>
 
+  <!-- Scripts (Slideshow + Filter) -->
   <script>
-  function initSlideshow(container) {
-    let slideIndex = 0;
-    const slides = container.querySelectorAll(".slides img");
-    const prevBtn = container.querySelector(".prev");
-    const nextBtn = container.querySelector(".next");
-    function showSlide(n) { slides.forEach((img,i)=>{img.classList.remove("active"); if(i===n) img.classList.add("active");}); }
-    function nextSlide() { slideIndex = (slideIndex+1)%slides.length; showSlide(slideIndex);}
-    function prevSlide() { slideIndex=(slideIndex-1+slides.length)%slides.length; showSlide(slideIndex);}
-    nextBtn.addEventListener("click", nextSlide);
-    prevBtn.addEventListener("click", prevSlide);
-    setInterval(nextSlide,5000);
-    showSlide(slideIndex);
-  }
-  document.querySelectorAll(".slideshow").forEach(initSlideshow);
+    function initSlideshow(container) {
+      let slideIndex = 0;
+      const slides = container.querySelectorAll(".slides img");
+      const prevBtn = container.querySelector(".prev");
+      const nextBtn = container.querySelector(".next");
 
-  function filterVehicles() {
-    const min=parseInt(document.getElementById("minPrice").value);
-    const max=parseInt(document.getElementById("maxPrice").value);
-    const vehicles=document.querySelectorAll(".category");
-    vehicles.forEach(v=>{const price=parseInt(v.getAttribute("data-price")); if(price>=min&&price<=max){v.style.display="block";}else{v.style.display="none";}});
-  }
+      function showSlide(n) {
+        slides.forEach((img, i) => {
+          img.classList.remove("active");
+          if (i === n) img.classList.add("active");
+        });
+      }
+
+      function nextSlide() {
+        slideIndex = (slideIndex + 1) % slides.length;
+        showSlide(slideIndex);
+      }
+
+      function prevSlide() {
+        slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+        showSlide(slideIndex);
+      }
+
+      nextBtn.addEventListener("click", nextSlide);
+      prevBtn.addEventListener("click", prevSlide);
+      setInterval(nextSlide, 5000);
+      showSlide(slideIndex);
+    }
+
+    document.querySelectorAll(".slideshow").forEach(initSlideshow);
+
+    function filterVehicles() {
+      const min = parseInt(document.getElementById("minPrice").value);
+      const max = parseInt(document.getElementById("maxPrice").value);
+      const vehicles = document.querySelectorAll(".category");
+
+      vehicles.forEach(v => {
+        const price = parseInt(v.getAttribute("data-price"));
+        if (price >= min && price <= max) {
+          v.style.display = "block";
+        } else {
+          v.style.display = "none";
+        }
+      });
+    }
   </script>
 </body>
 </html>
